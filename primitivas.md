@@ -24,10 +24,15 @@ Lisp es un lenguaje basado en listas, por lo que cuenta con muchas funciones pri
 
 (car '(1 2 3)) ;; Devuelve 1, Retorna el primer elemento de una lista.
 (cdr '(1 2 3)) ;; Devuelve (2 3), Retorna la lista sin el primer elemento.
-(cdddr '(12345));; el nivel de cdr es hasta 4 por lo tanto imprime ( 5 )
+(car '((2 5)(4 3) 3 2))
+ (cdr '((2 5)(4 3) 3 2 3))
+
+(cdddr '(12345));; el nivel de cdr es hasta 4 por lo tanto imprime (5)
 (cons 5 '(2 3)) ;; Devuelve (5 2 3), Agrega un elemento al inicio de una lista.
 (append '(1 2) '(3 4)) ;; Devuelve (1 2 3 4), Une dos listas.
 (list 7 8 9) ;; Devuelve (7 8 9), Crea una nueva lista con los elementos dados.
+
+canbinaciones para cada una 2 3 5 
 
 # Funciones Lógicas
 Permiten evaluar condiciones lógicas dentro del código Lisp.

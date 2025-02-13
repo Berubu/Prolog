@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class sumaspot {
 
-    // Método recursivo para sumar dos números
+    /* Método recursivo para sumar dos números
     public static int suma(int a, int b) {
         if (b == 0) {
             return a;
         } else {
             return suma(a + 1, b - 1);
         }
-    }
+    }*/
 
     // Método recursivo para calcular la potencia
     public static int potencia(int base, int exponente) {
