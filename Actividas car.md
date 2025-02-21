@@ -16,7 +16,7 @@ Lista: (a b c d e) → Extraer d  = (cadddr ' (a b c d e))
 
   Lista: ((p (q (r s))) t u) → Extraer (r s) =  (car (cdr (car (cdr (car '((p (q (r s))) t u))))))
 
-  Lista: (((a) b) (c (d e)) f) → Extraer d
+  Lista: (((a) b) (c (d e)) f) → Extraer d = (car(cdr(cadadr '(((a) b) (c (d e)) f))))
 
   Lista: ((1 (2 (3 4))) (5 6)) → Extraer 3
 
@@ -39,3 +39,7 @@ Lista: (a b c d e) → Extraer d  = (cadddr ' (a b c d e))
   Lista: ((x (y (z (w v))))) → Extraer w
 
   Lista: (((a b c) (d e f)) ((g h i) (j k l))) → Extraer j
+
+
+
+dada cualquier lista
