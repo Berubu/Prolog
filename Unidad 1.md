@@ -1,3 +1,4 @@
+## UNIDAD 1
 ## EJERCICIO 1
 1.- Que calcule el sueldo que le corresponde al trabajador de una
 empresa que cobra 40.000 euros anuales, el programa debe realizar los
@@ -70,3 +71,62 @@ quiere entrar.
     (entrada-fiesta edad)))
 
 (main)
+
+
+
+
+
+## UNIDAD 2
+
+Prolog 
+
+Arbol familiar 
+correccion de reglas de inferencia 
+
+# Ejecicio 
+En una calle hay cinco casas, cada una de un color distinto.  En cada
+casa vive una persona de distinta nacionalidad.  Cada dueño bebe un
+único tipo de bebida, fuma una sola marca de cigarrillos y tiene una
+mascota diferente a sus vecinos.  A partir de las 15 pistas
+presentadas a continuación, la consigna que hay que responder es:
+"¿Quién es el dueño del pez?".
+ 
+El británico vive en la casa roja.
+El sueco tiene un perro como mascota.
+El danés toma té.
+El noruego vive en la primera casa.
+El alemán fuma Prince.
+La casa verde está inmediatamente a la izquierda de la blanca.
+El dueño de la casa verde bebe café.
+El propietario que fuma Pall Mall cría pájaros.
+El dueño de la casa amarilla fuma Dunhill.
+El hombre que vive en la casa del centro bebe leche.
+El vecino que fuma Blends vive al lado del que tiene un gato.
+El hombre que tiene un caballo vive al lado del que fuma Dunhill.
+El propietario que fuma Bluemaster toma cerveza.
+El vecino que fuma Blends viveal lado del que toma agua.
+El noruego vive al lado de la casa azul.
+
+# Ejecicio
+Acertijo de los Científicos y sus Laboratorios Cinco científicos
+trabajan en un centro de investigación. Cada uno tiene un laboratorio en
+un color diferente y se especializa en una rama distinta de la
+ciencia. Además, cada científico usa un tipo diferente de equipo y
+prefiere una bebida específica mientras trabaja.
+
+Pistas El científico en el laboratorio rojo investiga en Biología.  El
+físico trabaja en el laboratorio azul.  El químico usa un microscopio.
+La persona en el laboratorio verde toma té.  El laboratorio verde está a
+la derecha del laboratorio blanco.  El científico que usa un
+espectrofotómetro investiga en Química.  El investigador del laboratorio
+amarillo usa una centrífuga.  El científico en el laboratorio del centro
+toma café.  El investigador del laboratorio naranja trabaja en
+Matemáticas.  El científico en el primer laboratorio usa un microscopio.
+El científico que usa una pipeta trabaja junto al que investiga en
+Física.  El científico que usa una balanza trabaja junto al que usa un
+espectrofotómetro.  El investigador que trabaja en Ciencias de la
+Computación usa una laptop.  Uno de los científicos usa un osciloscopio.
+El científico en el laboratorio negro bebe agua.  Preguntas a responder
+con Prolog ¿En qué laboratorio trabaja el científico de Química?  ¿Quién
+usa la pipeta?  ¿Cuál es la bebida preferida del científico que
+investiga en Matemáticas?
