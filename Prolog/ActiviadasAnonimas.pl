@@ -5,14 +5,6 @@ permutacion(Lista, [Elemento|PermutacionResto]) :-
     select(Elemento, Lista, Resto),
     permutacion(Resto, PermutacionResto).
 
-% Ejemplo de uso:
-% ?- permutacion([a, b, c], P).
-% P = [a, b, c] ;
-% P = [a, c, b] ;
-% P = [b, a, c] ;
-% P = [b, c, a] ;
-% P = [c, a, b] ;
-% P = [c, b, a].
 
 ##3. Generar subconjuntos de una lista Utiliza subconjunto para encontrar todos los subconjuntos posibles de una lista.
 
@@ -22,53 +14,39 @@ subconjunto(Resto, SubconjuntoResto).
 subconjunto([_|Resto], SubconjuntoResto) :-
 subconjunto(Resto, SubconjuntoResto).
 
-% Ejemplo de uso:
-% ?- subconjunto([1, 2, 3], S).
-% S = [] ;
-% S = [1] ;
-% S = [2] ;
-% S = [3] ;
-% S = [1, 2] ;
-% S = [1, 3] ;
-% S = [2, 3] ;
-% S = [1, 2, 3].
 
-4. Encontrar todos los números en un rango que cumplen una condición
-Usa findall para encontrar números que cumplan una propiedad específica, como ser pares o primos.
+##4. Encontrar todos los números en un rango que cumplen una condiciónUsa findall para encontrar números que cumplan una propiedad específica, como ser pares o primos.
 
-Problema: Encuentra todos los números primos entre 1 y 20.
+es_primo(2).
+es_primo(N) :-
+    N > 2,
+    \+ (between(2, N1, N), N1 is N - 1, N mod N1 =:= 0).
 
-Predicados: findall, es\primo.
+% Encontrar todos los números primos en un rango
+primos_en_rango(Inicio, Fin, Primos) :-
+    findall(N, (between(Inicio, Fin, N), es_primo(N)), Primos).
 
-5. Concatenar dos listas
-Usa append para combinar dos listas en una sola.
 
-Problema: Combina `[1, 2]` y `[3, 4]` en `[1, 2, 3, 4]`.
+##5. Concatenar dos listasUsa append para combinar dos listas en una sola.
 
-Predicado: append.
 
-6. Encontrar elementos únicos en una lista
-Usa findall y member para eliminar duplicados.
+concatenar(Lista1, Lista2, Resultado) :-
+    append(Lista1, Lista2, Resultado).
 
-Problema: Dada la lista [1, 2, 2, 3, 3, 3, 4], genera [1, 2, 3, 4].
 
-Predicados: findall, member.
+## 6. Encontrar elementos únicos en una lista
 
-7. Calcular la potencia de un número
-Usa un predicado recursivo y `findall/3` para calcular todas las potencias de un número hasta un límite.
+unicos(Lista, Unicos) :-
+    findall(X, (member(X, Lista), \+ (select(X, Lista, Resto), member(X, Resto))), Unicos).
 
-Problema: Dado el número 2, calcula sus potencias hasta 25
-:
 
-[1, 2, 4, 8, 16, 32]
-Predicado: findall.
+## 7. Calcular la potencia de un número
+potencias(Numero, Limite, Potencias) :-
+    findall(P, (between(0, Limite, E), P is Numero ** E, P =< Limite), Potencias).
 
-8. Alinear equipos en un torneo
-Usa *permutacion*` para generar todas las alineaciones posibles de equipos en un torneo.
-
-Problema: Dado un conjunto de equipos [A, B, C], genera todas las combinaciones posibles de enfrentamientos.
-
-Predicado: permutacion
+## 8. Alinear equipos en un torneo
+alineaciones(Equipos, Alineaciones) :-
+    findall(A, permutacion(Equipos, A), Alineaciones).
 
 9. Resolver problemas de caminos
 Encuentra todas las rutas posibles entre dos nodos en un grafo utilizando `findall/3`.
