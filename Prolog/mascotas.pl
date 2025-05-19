@@ -15,17 +15,13 @@
 # Casa 4 → Verde, Café.  
 # Casa 5 → Blanca.  
 
-
 # El **danés toma té**, así que está en la casa 2.  
 # El **alemán fuma Prince**, y la única casa sin cigarro es la 4.  
 # Entonces, el **alemán vive en la casa 4**.  
 
-
 # El **sueco tiene un perro**, y solo falta la casa 5, así que ahí está el sueco y su perro.  
 # El que fuma **Pall Mall tiene pájaros**, la única casa sin cigarro asignado es la 3.  
 # Así que el **británico (casa 3) tiene pájaros**.  
-
-
 # Solo faltan las mascotas de la casa 1 y la casa 4.  
 # Como no mencionan al pez en ninguna pista, debe estar en una de esas casas.  
 # Ya sabemos que la casa 1 es del noruego, y la casa 4 es del alemán.  
@@ -64,14 +60,8 @@ cigarro(blends)
 cigarro(blemaster)
 
 viveEn(X) :- casa(roja), persona(britanico).
-
 tieneMascota(X) :- mascota(perro), persona(sueco).
-
 tomaBebida(X) :- bebida(te), persona(danes).
-
-
 fumaCigarro(X) :- cigarro(prince), persona(aleman).
-
 viveAlado(X,Y) :- casa(verde), casa(blanca).
-
 bebeCafe(X) :- casa(verde), bebida(cafe).
