@@ -6,10 +6,7 @@
 ##Hermes cuida el templo de fuego o de agua.
 
 ##Pregunta: ¿Qué templo cuida cada guardián?
-
-
 ##el o se pone ; 
-
 
 guardianes([apolo, hecate, ares, hermes]).
 templos([fuego, agua, tierra, aire]).
