@@ -1,4 +1,52 @@
-## UNIDAD 1
+## Programacion Funcional 
+Es un estilo donde todo es función y no cambia. O sea, las variables son inmutables una vez les das un valor, ya no lo cambias y no guardan estado secreto que vaya mutando a lo largo del programa. En vez de ir paso a paso con for o while, compones funciones unas con otras y recurres si necesitas repetir algo.
+
+## ¿De dónde sale todo esto?
+Le debemos mucho a Alonzo Church y su Cálculo Lambda, un sistema matemático para describir funciones y cómo aplicarlas. Ahí aprendieron a:
+
+Escribir recursión pura nada de bucles tradicionales.
+
+Tener combinadores como el famoso  y Combinator que permite recursión sin llamarse a sí mismo por nombre.
+Y sobre ese cimiento se construyeron lenguajes como Lisp, Haskell, OCaml, Clojure, etc. Algunos son tipados dinámicos (Lisp), otros estáticos fuertes (Haskell), pero todos comparten la idea de inmutabilidad y funciones de alto orden.
+
+## ¿Cómo es en la práctica?
+“Debo poner atención en clase” 500 veces. En PHP imperativo sería un for:
+
+php
+Copiar código
+for ($i = 0; $i < 500; $i++) {
+    echo "Debo poner atención en clase";
+}
+
+lisp
+Copiar código
+(loop repeat 500 do (format t "Debo poner atención en clase~%"))
+Ningún bucle for; todo es composición: “repite esto”, “toma 500” y “ejecuta putStrLn en cada uno”.
+
+Transformaciones Lambda: α, β y η
+En el mundo de Church hay tres trucos clave:
+α‑conversión: renombrar variables para evitar confusiones.
+β‑reducción: aplicar la función sustituyendo parámetros por valores.
+η‑conversión: simplificar funciones equivalentes. Por ejemplo:
+
+haskell
+Copiar código
+absN n = abs n       -- versión “verborreica”
+absN'   = abs        -- versión reducida (η‑conversión)
+Funciones puras y monadas
+Lo chido de las funciones puras es que siempre que les das un input, devuelven el mismo output sin efectos colaterales. Pero a veces sí necesitas, por ejemplo, leer de disco o imprimir en pantalla. Ahí entran las mónadas (en Haskell, la clásica IO), que te permiten encadenar acciones “impuras” manteniendo el estilo funcional.
+
+¿Y en lenguajes normales?
+Hoy casi todos los lenguajes OOP traen cositas funcionales:
+
+Java ya tiene lambdas y streams.
+
+Python lleva rato teniendo map, filter y comprensión de listas.
+
+Incluso en JavaScript usamos .reduce(), .filter() y demás.
+
+Así, aunque no seas 100% “funcional”, puedes aprovechar inmutabilidad, funciones de alto orden y expresiones concisas para escribir código más limpio y menos propenso a errores.
+
 ## EJERCICIO 1
 1.- Que calcule el sueldo que le corresponde al trabajador de una
 empresa que cobra 40.000 euros anuales, el programa debe realizar los
