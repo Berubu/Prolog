@@ -1,6 +1,13 @@
+% ----------------- Directivas para evitar warnings de SWI-Prolog ----------
 :- discontiguous procesar_entrada/2.
+:- discontiguous hermano/2.
+:- discontiguous hermana/2.
+:- discontiguous especialista/2.
+:- discontiguous tratamiento/2.
+:- discontiguous recomendaciones/2.
+:- discontiguous causas/2.
 
-% Hechos basicos: familia
+% -------------------- HECHOS BÁSICOS: FAMILIA ----------------------
 padre(david, rodrigo).
 padre(gabino, maria_isabel).
 padre(gabino, salud).
@@ -17,7 +24,7 @@ padre(gabino, gabino_j).
 padre(rodrigo, isabel).
 padre(rodrigo, cassandra).
 padre(rodrigo, maury).
-padre(rodrigo, david_hijo).
+padre(rodrigo, david_segundo).
 
 padre(antonio, jenny).
 padre(antonio, antonio_j).
@@ -47,9 +54,9 @@ padre(miguel, rubi).
 padre(julio, valeria).
 padre(julio, yamilet).
 padre(julio, hellen).
-padre(david_hijo, davicito).
-padre(david_hijo, izack).
-padre(david_hijo, mia).
+padre(david_segundo, davicito).
+padre(david_segundo, izack).
+padre(david_segundo, mia).
 
 madre(maurilia, rodrigo).
 madre(maria_gregoria, maria_isabel).
@@ -67,7 +74,7 @@ madre(maria_gregoria, gabino_j).
 madre(maria_isabel, isabel).
 madre(maria_isabel, cassandra).
 madre(maria_isabel, maury).
-madre(maria_isabel, david_hijo).
+madre(maria_isabel, david_segundo).
 
 madre(salud, jenny).
 madre(salud, antonio_j).
@@ -113,99 +120,138 @@ casados(agustin, rosario).
 casados(nicolas, mercedes).
 casados(miguel, cassandra).
 casados(julio, maury).
-casados(david_hijo, diana_s).
+casados(david_segundo, diana_s).
 
 en_relacion(isabel, raul).
 
-hombre(david). 
-hombre(gabino). 
-hombre(rodrigo). 
-hombre(antonio). 
-hombre(roman).
-hombre(roberto). 
-hombre(nect). 
-hombre(chavo). 
-hombre(agustin). 
-hombre(nicolas).
-hombre(pedro). 
-hombre(gabino_j). 
-hombre(david_hijo). 
-hombre(antonio_j). 
-hombre(ramon).
-hombre(roman_j). 
-hombre(cesar). 
-hombre(roberto_j). 
-hombre(brayan). 
-hombre(nectalyn).
-hombre(pablo). 
-hombre(juan).
- hombre(francisco). 
- hombre(jorge). 
- hombre(jose).
-hombre(diego). 
-hombre(nenon). 
-hombre(miguel). 
-hombre(julio).
- hombre(davicito).
-hombre(izack). 
-hombre(raul).
+hombre(david). hombre(gabino). hombre(rodrigo). hombre(antonio). hombre(roman).
+hombre(roberto). hombre(nect). hombre(chavo). hombre(agustin). hombre(nicolas).
+hombre(pedro). hombre(gabino_j). hombre(david_segundo). hombre(antonio_j). hombre(ramon).
+hombre(roman_j). hombre(cesar). hombre(roberto_j). hombre(brayan). hombre(nectalyn).
+hombre(pablo). hombre(juan). hombre(francisco). hombre(jorge). hombre(jose).
+hombre(diego). hombre(nenon). hombre(miguel). hombre(julio). hombre(davicito).
+hombre(izack). hombre(raul).
 
-mujer(maurilia). 
-mujer(maria_gregoria). 
-mujer(maria_isabel). 
-mujer(salud). 
-mujer(ramona).
-mujer(rosa). 
-mujer(mari). 
-mujer(alejandra). 
-mujer(cristina). 
-mujer(rosario).
-mujer(mercedes). 
-mujer(isabel). 
-mujer(cassandra). 
-mujer(maury). 
-mujer(jenny).
-mujer(andrea).
- mujer(diana). 
- mujer(wendy). 
- mujer(fernanda). 
- mujer(jessenia).
-mujer(nancy). 
-mujer(lizet). 
-mujer(esmeralda). 
-mujer(rubi). 
-mujer(valeria).
-mujer(yamilet). 
-mujer(hellen). 
-mujer(diana_s). 
-mujer(mia).
+mujer(maurilia). mujer(maria_gregoria). mujer(maria_isabel). mujer(salud). mujer(ramona).
+mujer(rosa). mujer(mari). mujer(alejandra). mujer(cristina). mujer(rosario).
+mujer(mercedes). mujer(isabel). mujer(cassandra). mujer(maury). mujer(jenny).
+mujer(andrea). mujer(diana). mujer(wendy). mujer(fernanda). mujer(jessenia).
+mujer(nancy). mujer(lizet). mujer(esmeralda). mujer(rubi). mujer(valeria).
+mujer(yamilet). mujer(hellen). mujer(diana_s). mujer(mia).
 
-% Enfermedades
-sintoma_cancer_rinon(hematuria).
-sintoma_cancer_rinon(dolor_en_el_costado).
-sintoma_cancer_rinon(masa_abdominal).
-sintoma_cancer_rinon(perdida_de_peso).
-sintoma_cancer_rinon(fatiga).
-sintoma_cancer_rinon(fiebre).
-sintoma_cancer_rinon(sudores_nocturnos).
-sintoma_cancer_rinon(anemia).
-sintoma_cancer_rinon(hipertension).
-sintoma_cancer_rinon(dolor_abdominal).
-sintoma_cancer_rinon(hinchazon_en_las_piernas).
-sintoma_cancer_rinon(perdida_de_apetito).
+% ------------ HERMANOS ESPECIALES (PERSONALIZADO) ----------------
+hermanos_de(isabel, [maury, david_segundo, cassandra]).
+hermanos_de(maury, [isabel, david_segundo, cassandra]).
+hermanos_de(david_segundo, [isabel, maury, cassandra]).
+hermanos_de(cassandra, [isabel, maury, david_segundo]).
 
-sintoma_paperas(inflamacion_glandulas_salivales).
-sintoma_paperas(dolor_mandibula).
-sintoma_paperas(fiebre).
-sintoma_paperas(dolor_de_cabeza).
-sintoma_paperas(dolor_muscular).
-sintoma_paperas(fatiga).
-sintoma_paperas(perdida_apetito).
-sintoma_paperas(dolor_masticar).
-sintoma_paperas(dolor_tragar).
-sintoma_paperas(sequedad_boca).
+hermano(X, Y) :- hermanos_de(Y, Lista), member(X, Lista), hombre(X).
+hermana(X, Y) :- hermanos_de(Y, Lista), member(X, Lista), mujer(X).
+hermano(X, Y) :- progenitor(P, X), progenitor(P, Y), X \= Y, hombre(X).
+hermana(X, Y) :- progenitor(P, X), progenitor(P, Y), X \= Y, mujer(X).
 
-% One Direction
+progenitor(X, Y) :- padre(X, Y).
+progenitor(X, Y) :- madre(X, Y).
+hijo(X, Y) :- progenitor(Y, X), hombre(X).
+hija(X, Y) :- progenitor(Y, X), mujer(X).
+abuelo(X, Z) :- padre(X, Y), progenitor(Y, Z).
+abuela(X, Z) :- madre(X, Y), progenitor(Y, Z).
+tio(X, Y) :- hermano(X, Z), progenitor(Z, Y).
+tia(X, Y) :- hermana(X, Z), progenitor(Z, Y).
+primo(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermano(P1, P2), hombre(X).
+primo(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermana(P1, P2), hombre(X).
+prima(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermano(P1, P2), mujer(X).
+prima(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermana(P1, P2), mujer(X).
+esposo(X, Y) :- casados(X, Y), hombre(X).
+esposo(X, Y) :- casados(Y, X), hombre(X).
+esposa(X, Y) :- casados(X, Y), mujer(X).
+esposa(X, Y) :- casados(Y, X), mujer(X).
+nieto(X, Y) :- abuelo(Y, X), hombre(X).
+nieto(X, Y) :- abuela(Y, X), hombre(X).
+nieta(X, Y) :- abuelo(Y, X), mujer(X).
+nieta(X, Y) :- abuela(Y, X), mujer(X).
+descendientes(X, Descendientes) :- findall(Y, descendiente(X, Y), Descendientes).
+descendiente(X, Y) :- progenitor(X, Y).
+descendiente(X, Z) :- progenitor(X, Y), descendiente(Y, Z).
+ancestros(X, Ancestros) :- findall(Y, ancestro(Y, X), Ancestros).
+ancestro(X, Y) :- progenitor(X, Y).
+ancestro(X, Z) :- progenitor(X, Y), ancestro(Y, Z).
+
+% -------------------- ENFERMEDADES --------------------
+% Sintomas aceptan espacios
+sintoma_cancer_rinon('hematuria').
+sintoma_cancer_rinon('dolor en el costado').
+sintoma_cancer_rinon('masa abdominal').
+sintoma_cancer_rinon('perdida de peso').
+sintoma_cancer_rinon('fatiga').
+sintoma_cancer_rinon('fiebre').
+sintoma_cancer_rinon('sudores nocturnos').
+sintoma_cancer_rinon('anemia').
+sintoma_cancer_rinon('hipertension').
+sintoma_cancer_rinon('dolor abdominal').
+sintoma_cancer_rinon('hinchazon en las piernas').
+sintoma_cancer_rinon('perdida de apetito').
+
+sintoma_paperas('inflamacion glandulas salivales').
+sintoma_paperas('dolor mandibula').
+sintoma_paperas('fiebre').
+sintoma_paperas('dolor de cabeza').
+sintoma_paperas('dolor muscular').
+sintoma_paperas('fatiga').
+sintoma_paperas('perdida apetito').
+sintoma_paperas('dolor masticar').
+sintoma_paperas('dolor tragar').
+sintoma_paperas('sequedad boca').
+
+especialista(cancer_rinon, 'Nefrologo, Oncologo').
+tratamiento(cancer_rinon, 'Cirugia, terapia dirigida, inmunoterapia, o radioterapia segun el caso').
+recomendaciones(cancer_rinon, [
+    'Evitar fumar',
+    'Mantener un peso saludable',
+    'Controlar la presion arterial',
+    'Realizar chequeos periodicos'
+]).
+causas(cancer_rinon, [
+    'Tabaquismo',
+    'Obesidad',
+    'Presion arterial alta',
+    'Exposicion a sustancias toxicas'
+]).
+
+especialista(paperas, 'Medico general, Pediatra').
+tratamiento(paperas, 'Reposo, hidratacion, medicamentos para la fiebre y dolor. No hay tratamiento especifico, solo sintomatico.').
+recomendaciones(paperas, [
+    'Reposar',
+    'Beber muchos liquidos',
+    'Evitar alimentos acidos',
+    'Aislarse para no contagiar a otros'
+]).
+causas(paperas, [
+    'Infeccion por el virus de las paperas',
+    'Contagio por contacto con saliva de infectados'
+]).
+
+menu_info_enfermedad(Enfermedad) :-
+    format('¿Quieres saber sobre especialista, tratamiento, recomendaciones o causas para ~w?~n', [Enfermedad]),
+    write('Escribe una de estas opciones: especialista, tratamiento, recomendaciones, causas, o "nada" para continuar.'), nl,
+    write('> '), flush_output(current_output),
+    read_line_to_codes(user_input, InputCodes),
+    atom_codes(InputAtom, InputCodes),
+    downcase_atom(InputAtom, Resp),
+    ( Resp == especialista -> mostrar_especialista(Enfermedad), menu_info_enfermedad(Enfermedad)
+    ; Resp == tratamiento   -> mostrar_tratamiento(Enfermedad), menu_info_enfermedad(Enfermedad)
+    ; Resp == recomendaciones -> mostrar_recomendaciones(Enfermedad), menu_info_enfermedad(Enfermedad)
+    ; Resp == causas -> mostrar_causas(Enfermedad), menu_info_enfermedad(Enfermedad)
+    ; Resp == nada -> write('Si tienes mas dudas escribe "ayuda" o consulta a un medico.'), nl
+    ; write('Opcion no valida. Prueba otra vez.'), nl, menu_info_enfermedad(Enfermedad)
+    ).
+
+mostrar_especialista(E) :- especialista(E, Esp), format('El especialista recomendado es: ~w~n', [Esp]).
+mostrar_tratamiento(E) :- tratamiento(E, T), format('Tratamiento sugerido: ~w~n', [T]).
+mostrar_recomendaciones(E) :- recomendaciones(E, Recs), write('Recomendaciones generales:'), nl, forall(member(R, Recs), format('- ~w~n', [R])).
+mostrar_causas(E) :- causas(E, Cs), write('Causas comunes:'), nl, forall(member(C, Cs), format('- ~w~n', [C])).
+
+% -------------------- ONE DIRECTION --------------------
 member_one_direction(harry_styles).
 member_one_direction(liam_payne).
 member_one_direction(niall_horan).
@@ -228,37 +274,118 @@ fact_one_direction(albums, 'Lanzaron cinco albumes de estudio.').
 fact_one_direction(zayn, 'Zayn Malik abandono la banda en 2015 para seguir una carrera como solista.').
 fact_one_direction(gira, 'Realizaron varias giras mundiales, incluyendo "Take Me Home Tour" y "Where We Are Tour".').
 
-% Reglas de genealogia
-progenitor(X, Y) :- padre(X, Y).
-progenitor(X, Y) :- madre(X, Y).
-hijo(X, Y) :- progenitor(Y, X), hombre(X).
-hija(X, Y) :- progenitor(Y, X), mujer(X).
-abuelo(X, Z) :- padre(X, Y), progenitor(Y, Z).
-abuela(X, Z) :- madre(X, Y), progenitor(Y, Z).
-hermano(X, Y) :- progenitor(P, X), progenitor(P, Y), X \= Y, hombre(X).
-hermana(X, Y) :- progenitor(P, X), progenitor(P, Y), X \= Y, mujer(X).
-tio(X, Y) :- hermano(X, Z), progenitor(Z, Y).
-tia(X, Y) :- hermana(X, Z), progenitor(Z, Y).
-primo(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermano(P1, P2), hombre(X).
-primo(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermana(P1, P2), hombre(X).
-prima(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermano(P1, P2), mujer(X).
-prima(X, Y) :- progenitor(P1, X), progenitor(P2, Y), hermana(P1, P2), mujer(X).
-esposo(X, Y) :- casados(X, Y), hombre(X).
-esposo(X, Y) :- casados(Y, X), hombre(X).
-esposa(X, Y) :- casados(X, Y), mujer(X).
-esposa(X, Y) :- casados(Y, X), mujer(X).
-nieto(X, Y) :- abuelo(Y, X), hombre(X).
-nieto(X, Y) :- abuela(Y, X), hombre(X).
-nieta(X, Y) :- abuelo(Y, X), mujer(X).
-nieta(X, Y) :- abuela(Y, X), mujer(X).
-descendientes(X, Descendientes) :- findall(Y, descendiente(X, Y), Descendientes).
-descendiente(X, Y) :- progenitor(X, Y).
-descendiente(X, Z) :- progenitor(X, Y), descendiente(Y, Z).
-ancestros(X, Ancestros) :- findall(Y, ancestro(Y, X), Ancestros).
-ancestro(X, Y) :- progenitor(X, Y).
-ancestro(X, Z) :- progenitor(X, Y), ancestro(Y, Z).
+descripcion_one_direction([
+    'Claro, One Direction es una boy band britanica-irlandesa formada en 2010 en The X Factor.',
+    'Los miembros originales son Harry Styles, Liam Payne, Louis Tomlinson, Niall Horan y Zayn Malik.',
+    'Saltaron a la fama rapidamente y lanzaron exitos como "What Makes You Beautiful" y "Story of My Life".',
+    'En 2015, Zayn Malik dejo la banda para una carrera como solista.',
+    'Actualmente la banda esta en pausa indefinida desde 2016.'
+]).
 
-% Saludos y despedidas
+info_integrante_one_direction(harry, 'Harry Styles es conocido por su carrera como solista, su estilo unico y ha ganado multiples premios tras One Direction.').
+info_integrante_one_direction(liam, 'Liam Payne es cantante y productor, lanzo musica como solista y participa en obras de caridad.').
+info_integrante_one_direction(louis, 'Louis Tomlinson continuo su carrera como solista, participo en shows de TV y es muy querido por los fans.').
+info_integrante_one_direction(niall, 'Niall Horan ha lanzado exitos pop/folk y es conocido por su habilidad con la guitarra.').
+info_integrante_one_direction(zayn, 'Zayn Malik se fue en 2015 para una carrera R&B solista, logrando varios exitos.').
+
+mostrar_miembros_one_direction :-
+    nl, write('------------------------MIEMBROS DE ONE DIRECTION------------------------'), nl,
+    forall(member_one_direction(M), format('- ~w~n', [M])),
+    write('Zayn Malik dejo la banda en 2015.').
+
+mostrar_canciones_one_direction :-
+    nl, write('------------------------CANCIONES POPULARES DE ONE DIRECTION------------------------'), nl,
+    forall(song_one_direction(S), format('- ~w~n', [S])).
+
+mostrar_hechos_one_direction :-
+    nl, write('------------------------HECHOS SOBRE ONE DIRECTION------------------------'), nl,
+    forall(fact_one_direction(Concepto, Hecho), format('- ~w: ~w~n', [Concepto, Hecho])).
+
+mostrar_info_completa_one_direction :-
+    mostrar_miembros_one_direction, nl,
+    mostrar_canciones_one_direction, nl,
+    mostrar_hechos_one_direction, nl.
+
+% --- MAPEO DE INTEGRANTES ONE DIRECTION ---
+id_integrante(harry, [harry, styles, "harry styles"]).
+id_integrante(liam, [liam, payne, "liam payne"]).
+id_integrante(louis, [louis, tomlinson, "louis tomlinson"]).
+id_integrante(niall, [niall, horan, "niall horan"]).
+id_integrante(zayn, [zayn, malik, "zayn malik"]).
+
+% --- Consulta flexible para miembros de One Direction ---
+procesar_entrada(Words, continuar) :-
+    integrar_integrante_1d(Words, IdIntegrante), !,
+    info_integrante_one_direction(IdIntegrante, Txt), write(Txt), nl.
+
+integrar_integrante_1d(Words, IdIntegrante) :-
+    id_integrante(IdIntegrante, AliasList),
+    member(Alias, AliasList),
+    ( member(Alias, Words) ; atomic_list_concat(AliasWords, ' ', Alias), sublist(AliasWords, Words) ).
+
+% --------- SINTOMA NORMALIZADO (espacios y minusculas) ----------
+sintoma_normalizado(Str, SintomaNorm) :-
+    string_lower(Str, Lower),
+    normalize_space(atom(NormAtom), Lower),
+    NormAtom = SintomaNorm.
+
+% --------- TEST DE SINTOMAS ---------
+test_enfermedad :-
+    write('Te hare 5 preguntas sobre tus sintomas. Escribe un sintoma comun cada vez (ej: fiebre, fatiga, dolor de cabeza, etc.)'), nl,
+    pedir_sintomas_espacios(1, [], ListaFinal),
+    analizar_sintomas(ListaFinal).
+
+pedir_sintomas_espacios(6, Lista, Lista) :- !.
+pedir_sintomas_espacios(N, ListaAcumulada, ListaFinal) :-
+    format('Sintoma ~w: ', [N]), flush_output(current_output),
+    read_line_to_codes(user_input, InputCodes),
+    string_codes(SintomaStr, InputCodes),
+    sintoma_normalizado(SintomaStr, SintomaNorm),
+    N2 is N + 1,
+    pedir_sintomas_espacios(N2, [SintomaNorm|ListaAcumulada], ListaFinal).
+
+contar_coincidencias([], _, 0).
+contar_coincidencias([S|Resto], Lista, N) :-
+    ( member(S, Lista) -> contar_coincidencias(Resto, Lista, N2), N is N2+1
+    ; contar_coincidencias(Resto, Lista, N)
+    ).
+
+handle_sintomas_detectados(CR, P) :-
+    nl,
+    ( CR \== [] ->
+        length(CR, NumCR),
+        format('Detecte que ~w sintoma(s) que mencionaste (~w) podrian estar relacionados con CANCER DE RINON.~n', [NumCR, CR]),
+        write('Te recomiendo consultar a un medico.'), nl,
+        menu_info_enfermedad(cancer_rinon)
+    ; true
+    ),
+    ( P \== [] ->
+        length(P, NumP),
+        format('Detecte que ~w sintoma(s) que mencionaste (~w) podrian estar relacionados con PAPERAS.~n', [NumP, P]),
+        write('Te recomiendo consultar a un medico.'), nl,
+        menu_info_enfermedad(paperas)
+    ; true
+    ), nl.
+
+analizar_sintomas(SintomasInversos) :-
+    reverse(SintomasInversos, Sintomas),
+    findall(S, sintoma_cancer_rinon(S), ListaCR),
+    findall(S, sintoma_paperas(S), ListaP),
+    contar_coincidencias(Sintomas, ListaCR, CoincCR),
+    contar_coincidencias(Sintomas, ListaP, CoincP),
+    (CoincCR >= 3 ->
+        write('ATENCION: Al menos 3 de tus sintomas coinciden con CANCER DE RINON.'), nl,
+        write('Esto no es un diagnostico real, consulta siempre a un medico.'), nl,
+        menu_info_enfermedad(cancer_rinon)
+    ; CoincP >= 3 ->
+        write('Tus sintomas coinciden principalmente con PAPERAS.'), nl,
+        write('Esto no es un diagnostico real, consulta siempre a un medico.'), nl,
+        menu_info_enfermedad(paperas)
+    ; write('No se detectan sintomas claros de cancer de rinon ni paperas en tu caso.'), nl,
+      write('Si los sintomas persisten, consulta a un medico.'), nl
+    ).
+
+% --------- SALUDOS, AYUDA Y DESPEDIDAS ---------
 template_saludo([hola, mi, nombre, es, s(*)], ['Hola', nombre_placeholder, '.', 'En', 'que', 'puedo', 'ayudarte', '?'], [5]).
 template_saludo([buenas, tardes, mi, nombre, es, s(*)], ['Buenas', 'tardes', nombre_placeholder, '.', 'Como', 'estas', '?'], [5]).
 template_saludo([buenas, noches, soy, s(*)], ['Buenas', 'noches', nombre_placeholder, '.', 'Un', 'placer', 'conocerte', '.'], [4]).
@@ -375,7 +502,6 @@ plural_a_singular(esposos, esposo).
 plural_a_singular(esposas, esposa).
 
 % --------- PROCESAR ENTRADA PRINCIPAL ---------
-
 procesar_entrada(Words, terminar) :-
     palabra_despedida_usuario(Pattern),
     sublist(Pattern, Words), !,
@@ -401,8 +527,54 @@ procesar_entrada(Words, continuar) :-
      Words = [info, completa, '1d']),
     procesar_one_direction(Words), !.
 
-% One Direction general
+procesar_entrada(Words, continuar) :- 
+    member(hablame, Words), member(one, Words), member(direction, Words), !,
+    descripcion_one_direction(Descr),
+    forall(member(L, Descr), (write(L), nl)),
+    write('Puedes preguntarme por integrantes, canciones, historia, o pedirme una recomendacion de cancion.'), nl.
+
 procesar_entrada(Words, continuar) :-
+    (member(recomiendame, Words); member(recomienda, Words)), 
+    (member(cancion, Words); member(canciones, Words)),
+    (member(one, Words); member('1d', Words)), !,
+    findall(S, song_one_direction(S), Songs),
+    random_member(Song, Songs),
+    format('Te recomiendo escuchar: ~w~n', [Song]).
+
+procesar_entrada(Words, continuar) :-
+    (member(info, Words); member(informacion, Words)),
+    (member(de, Words), member(Integrante, [harry, liam, niall, louis, zayn]), member(Integrante, Words)), !,
+    info_integrante_one_direction(Integrante, Txt), write(Txt), nl.
+
+procesar_entrada(Words, continuar) :-
+    (member(que, Words); member(cuales, Words)),
+    (member(cancion, Words); member(canciones, Words)),
+    (member(one, Words); member('1d', Words)), !,
+    mostrar_canciones_one_direction.
+
+procesar_entrada(Words, continuar) :-
+    (member(info, Words); member(informacion, Words)),
+    (member(one, Words); member('1d', Words)), !,
+    mostrar_info_completa_one_direction.
+
+procesar_entrada(Words, continuar) :-
+    (member(quien, Words); member(quienes, Words)), 
+    (member(son, Words), member(integrantes, Words)),
+    (member(one, Words); member('1d', Words)), !,
+    mostrar_miembros_one_direction.
+
+procesar_entrada(Words, continuar) :-
+    (member(hazme, Words); member(dame, Words)), 
+    member(trivia, Words),
+    (member(one, Words); member('1d', Words)), !,
+    mostrar_hechos_one_direction.
+
+procesar_entrada(Words, continuar) :-
+    (member(integrante, Words); member(info, Words)),
+    (member(one, Words); member('1d', Words)), !,
+    write('Puedes preguntarme por info de Harry, Liam, Louis, Niall o Zayn.'), nl.
+
+procesar_entrada(Words, continuar) :- 
     ( (member(one, Words), member(direction, Words)) ; member('1d', Words) ),
     procesar_one_direction(Words), !.
 
@@ -477,39 +649,6 @@ mostrar_sintomas_paperas :-
     nl, write('------------------------SINTOMAS DE LAS PAPERAS------------------------'), nl,
     forall(sintoma_paperas(S), format('- ~w~n', [S])).
 
-mostrar_miembros_one_direction :-
-    nl, write('------------------------MIEMBROS DE ONE DIRECTION------------------------'), nl,
-    forall(member_one_direction(M), format('- ~w~n', [M])),
-    write('Zayn Malik dejo la banda en 2015.').
-
-mostrar_canciones_one_direction :-
-    nl, write('------------------------CANCIONES POPULARES DE ONE DIRECTION------------------------'), nl,
-    forall(song_one_direction(S), format('- ~w~n', [S])).
-
-mostrar_hechos_one_direction :-
-    nl, write('------------------------HECHOS SOBRE ONE DIRECTION------------------------'), nl,
-    forall(fact_one_direction(Concepto, Hecho), format('- ~w: ~w~n', [Concepto, Hecho])).
-
-mostrar_info_completa_one_direction :-
-    mostrar_miembros_one_direction, nl,
-    mostrar_canciones_one_direction, nl,
-    mostrar_hechos_one_direction, nl.
-
-handle_sintomas_detectados(CR, P) :-
-    nl,
-    ( CR \== [] ->
-        length(CR, NumCR),
-        format('Detecte que ~w sintoma(s) que mencionaste (~w) podrian estar relacionados con CANCER DE RINON.~n', [NumCR, CR]),
-        write('Consulta a un medico.'), nl
-    ; true
-    ),
-    ( P \== [] ->
-        length(P, NumP),
-        format('Detecte que ~w sintoma(s) que mencionaste (~w) podrian estar relacionados con PAPERAS.~n', [NumP, P]),
-        write('Consulta a un medico.'), nl
-    ; true
-    ), nl.
-
 mostrar_arbol_genealogico :-
     nl, write('PERSONAS REGISTRADAS (HOMBRES):'), nl,
     forall(hombre(H), format('- ~w~n', [H])), nl,
@@ -564,43 +703,6 @@ procesar_one_direction(Words) :-
     (member(info, Words), member(completa, Words)), !, mostrar_info_completa_one_direction, nl.
 procesar_one_direction(_) :- mostrar_info_completa_one_direction, nl.
 
-% --------- TEST DE SINTOMAS ---------
-test_enfermedad :-
-    write('Te hare 5 preguntas sobre tus sintomas. Escribe un sintoma comun cada vez (ej: fiebre, fatiga, dolor_en_el_costado, etc.)'), nl,
-    pedir_sintomas(1, [], ListaFinal),
-    analizar_sintomas(ListaFinal).
-
-pedir_sintomas(6, Lista, Lista) :- !.
-pedir_sintomas(N, ListaAcumulada, ListaFinal) :-
-    format('Sintoma ~w: ', [N]), flush_output(current_output),
-    read_line_to_codes(user_input, InputCodes),
-    atom_codes(InputAtom, InputCodes),
-    downcase_atom(InputAtom, Sintoma),
-    N2 is N + 1,
-    pedir_sintomas(N2, [Sintoma|ListaAcumulada], ListaFinal).
-
-analizar_sintomas(SintomasInversos) :-
-    reverse(SintomasInversos, Sintomas),
-    findall(S, sintoma_cancer_rinon(S), ListaCR),
-    contar_coincidencias(Sintomas, ListaCR, CoincCR),
-    findall(S, sintoma_paperas(S), ListaP),
-    contar_coincidencias(Sintomas, ListaP, CoincP),
-    (CoincCR >= 3 ->
-        write('ATENCION: Al menos 3 de tus sintomas coinciden con CANCER DE RINON.'), nl,
-        write('Esto no es un diagnostico real, consulta siempre a un medico.'), nl
-    ; CoincP >= 3 ->
-        write('Tus sintomas coinciden principalmente con PAPERAS.'), nl,
-        write('Esto no es un diagnostico real, consulta siempre a un medico.'), nl
-    ; write('No se detectan sintomas claros de cancer de rinon ni paperas en tu caso.'), nl,
-      write('Si los sintomas persisten, consulta a un medico.'), nl
-    ).
-
-contar_coincidencias([], _, 0).
-contar_coincidencias([S|Resto], Lista, N) :-
-    ( member(S, Lista) -> contar_coincidencias(Resto, Lista, N2), N is N2+1
-    ; contar_coincidencias(Resto, Lista, N)
-    ).
-
 % --------- INICIO ELIZA ---------
 eliza :-
     mostrar_saludo_inicial_aleatorio,
@@ -631,7 +733,6 @@ eliza_loop :-
             ;
                 eliza_loop
             )
+     
         )
     ).
-
-
